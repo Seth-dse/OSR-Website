@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSR — Operational Signal Reconnaissance | Independent PMC</title>
+  <meta name="description" content="Operational Signal Reconnaissance — a selective independent contractor collective specializing in threat assessment, security consulting, and operational response across contested systems.">
+  <meta property="og:title" content="OSR — Operational Signal Reconnaissance">
+  <meta property="og:description" content="We do not recruit broadly. We do not advertise results. Threat assessment. Security consulting. Operational response.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body data-page="home">
+  <canvas id="star-canvas" aria-hidden="true"></canvas>
+  <div class="scanline-overlay" aria-hidden="true"></div>
+
+  <!-- NAVIGATION -->
+  <div id="nav-wrapper">
+    <nav>
+      <a href="index.html" class="nav-logo">
+        <div>
+          <span class="nav-logo-text">OSR</span>
+          <span class="nav-logo-sub">Operational Signal Recon</span>
+        </div>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" data-page="home" class="active">Home</a></li>
+        <li><a href="about.html" data-page="about">Identity</a></li>
+        <li><a href="cells.html" data-page="cells">Divisions</a></li>
+        <li><a href="timeline.html" data-page="timeline">History</a></li>
+        <li><a href="starmap.html" data-page="starmap">Starmap</a></li>
+        <li><a href="gallery.html" data-page="gallery">Intel</a></li>
+        <li><a href="manifesto.html" data-page="manifesto">Manifesto</a></li>
+        <li><a href="recruitment.html" data-page="recruitment">Enlist</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section id="hero">
+    <div class="hero-bg">
+      <img src="assets/images/Carosel/Random/SC_25_Wallpaper_3840x2160.jpg" alt="OSR fleet in orbit — capital ship engagement">
+    </div>
+    <div class="hero-content">
+      <p class="hero-designation">◆ UEE-INDEPENDENT CONTRACTOR COLLECTIVE ◆</p>
+      <h1 class="hero-title">Operational Signal<br>Reconnaissance</h1>
+      <p class="hero-tagline">
+        Threat assessment. Security consulting. Operational response.
+        <br>
+        <span id="hero-typing" class="typing-cursor"></span>
+      </p>
+      <div class="hero-cta-group">
+        <a href="about.html" class="btn btn--primary">Learn More</a>
+        <a href="recruitment.html" class="btn btn--amber">Request Access</a>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span>Explore</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- BRIEF INTRO BELOW HERO -->
+  <section id="intro" class="intro-section">
+    <div class="container">
+      <div class="intro-grid reveal">
+        <div class="intro-card">
+          <div class="intro-card-icon">M</div>
+          <h3 class="intro-card-title">Intelligence</h3>
+          <p class="intro-card-text">Signal acquisition, data synthesis, and threat modeling across contested systems.</p>
+          <a href="cells.html" class="intro-card-link">Cell MIRROR →</a>
+        </div>
+        <div class="intro-card">
+          <div class="intro-card-icon">E</div>
+          <h3 class="intro-card-title">Direct Action</h3>
+          <p class="intro-card-text">Sanctioned operational response when the Directorate determines action is required.</p>
+          <a href="cells.html" class="intro-card-link">Cell EDGE →</a>
+        </div>
+        <div class="intro-card">
+          <div class="intro-card-icon">V</div>
+          <h3 class="intro-card-title">Cover Operations</h3>
+          <p class="intro-card-text">Public identity management, logistics, and external contractor relations.</p>
+          <a href="cells.html" class="intro-card-link">Cell VEIL →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-left">
+          <span class="footer-logo">OSR</span>
+          <span class="footer-copy">Operational Signal Reconnaissance — Est. ~2849 | All rights reserved.</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="about.html">Identity</a></li>
+          <li><a href="cells.html">Cells</a></li>
+          <li><a href="timeline.html">History</a></li>
+          <li><a href="starmap.html">Starmap</a></li>
+          <li><a href="manifesto.html">Manifesto</a></li>
+          <li><a href="https://robertsspaceindustries.com/en/orgs/OSR" target="_blank" rel="noopener">RSI</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Background Audio -->
+  <audio id="bg-audio" loop preload="auto">
+    <source src="assets/Audio/SC_SabreRavenTrailer.mp3" type="audio/mpeg">
+  </audio>
+  <button class="audio-toggle muted" id="audio-toggle" aria-label="Toggle ambient audio">
+    <div class="sound-bars"><span></span><span></span><span></span><span></span></div>
+  </button>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>

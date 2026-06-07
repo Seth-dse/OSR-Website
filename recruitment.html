@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enlist — OSR | Operational Signal Reconnaissance</title>
+  <meta name="description" content="OSR membership is by invitation only. Prospective members are identified, evaluated, and approached at the discretion of existing operatives.">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body data-page="recruitment">
+  <canvas id="star-canvas" aria-hidden="true"></canvas>
+  <div class="scanline-overlay" aria-hidden="true"></div>
+
+  <!-- NAVIGATION -->
+  <div id="nav-wrapper">
+    <nav>
+      <a href="index.html" class="nav-logo">
+        <div>
+          <span class="nav-logo-text">OSR</span>
+          <span class="nav-logo-sub">Operational Signal Recon</span>
+        </div>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" data-page="home">Home</a></li>
+        <li><a href="about.html" data-page="about">Identity</a></li>
+        <li><a href="cells.html" data-page="cells">Divisions</a></li>
+        <li><a href="timeline.html" data-page="timeline">History</a></li>
+        <li><a href="starmap.html" data-page="starmap">Starmap</a></li>
+        <li><a href="gallery.html" data-page="gallery">Intel</a></li>
+        <li><a href="manifesto.html" data-page="manifesto">Manifesto</a></li>
+        <li><a href="recruitment.html" data-page="recruitment" class="active">Enlist</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg">
+      <img src="assets/images/Banner/Random/SC_28_Wallpaper_851x315.jpg" alt="Operations">
+    </div>
+    <div class="page-hero-content">
+      <p class="section-label">// Invitation Only</p>
+      <h1 class="page-hero-title">Contact Protocol</h1>
+      <div class="section-line"></div>
+    </div>
+  </section>
+
+  <!-- RECRUITMENT CONTENT -->
+  <section id="recruitment" class="page-section">
+    <div class="container">
+      <div class="recruitment-box reveal">
+        <h2 class="recruitment-title">We Do Not Recruit Broadly</h2>
+        <p class="recruitment-text">
+          OSR membership is by invitation only. Prospective members are identified, evaluated,
+          and approached at the discretion of existing Warranted-tier operatives and above,
+          subject to Directorate approval. If you believe you have what it takes — demonstrate it.
+          The right people will notice.
+        </p>
+        <a href="https://robertsspaceindustries.com/en/orgs/OSR" target="_blank" rel="noopener" class="btn btn--primary">
+          View on RSI
+        </a>
+        <div class="recruitment-classification">
+          ◆ Contact Tier — Probationary access only ◆
+        </div>
+      </div>
+
+      <!-- REQUIREMENTS -->
+      <div class="recruitment-details stagger-children">
+        <div class="req-card reveal">
+          <div class="req-number">01</div>
+          <h3 class="req-title">Operational Competence</h3>
+          <p class="req-desc">
+            Members are expected to maintain a standard of operational competence, personal
+            discipline, and role proficiency consistent with OSR's mandate. We do not carry passengers.
+          </p>
+        </div>
+        <div class="req-card reveal">
+          <div class="req-number">02</div>
+          <h3 class="req-title">Operational Silence</h3>
+          <p class="req-desc">
+            OSR does not claim, confirm, or reference its operations publicly. Members do not
+            discuss sanctioned operations outside their cell. Results are not publicized.
+            Recognition is not sought.
+          </p>
+        </div>
+        <div class="req-card reveal">
+          <div class="req-number">03</div>
+          <h3 class="req-title">No Freelancing</h3>
+          <p class="req-desc">
+            Members do not conduct operations that intersect with OSR's mandate outside of
+            sanctioned activity. Undisclosed intersecting activity is treated as a security breach.
+          </p>
+        </div>
+        <div class="req-card reveal">
+          <div class="req-number">04</div>
+          <h3 class="req-title">Commitment</h3>
+          <p class="req-desc">
+            Advancement is observed and conferred, not requested. No member may self-advocate for
+            tier advancement. Regular participation in org activities is expected.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-left">
+          <span class="footer-logo">OSR</span>
+          <span class="footer-copy">Operational Signal Reconnaissance — Est. ~2849 | All rights reserved.</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="about.html">Identity</a></li>
+          <li><a href="cells.html">Cells</a></li>
+          <li><a href="timeline.html">History</a></li>
+          <li><a href="starmap.html">Starmap</a></li>
+          <li><a href="manifesto.html">Manifesto</a></li>
+          <li><a href="https://robertsspaceindustries.com/en/orgs/OSR" target="_blank" rel="noopener">RSI</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <audio id="bg-audio" loop preload="auto">
+    <source src="assets/Audio/SC_SabreRavenTrailer.mp3" type="audio/mpeg">
+  </audio>
+  <button class="audio-toggle muted" id="audio-toggle" aria-label="Toggle ambient audio">
+    <div class="sound-bars"><span></span><span></span><span></span><span></span></div>
+  </button>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>

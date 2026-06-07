@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Identity — OSR | Operational Signal Reconnaissance</title>
+  <meta name="description" content="OSR is a selective independent contractor collective specializing in threat assessment, security consulting, and operational response across contested systems.">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body data-page="about">
+  <canvas id="star-canvas" aria-hidden="true"></canvas>
+  <div class="scanline-overlay" aria-hidden="true"></div>
+
+  <!-- NAVIGATION -->
+  <div id="nav-wrapper">
+    <nav>
+      <a href="index.html" class="nav-logo">
+        <div>
+          <span class="nav-logo-text">OSR</span>
+          <span class="nav-logo-sub">Operational Signal Recon</span>
+        </div>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" data-page="home">Home</a></li>
+        <li><a href="about.html" data-page="about" class="active">Identity</a></li>
+        <li><a href="cells.html" data-page="cells">Divisions</a></li>
+        <li><a href="timeline.html" data-page="timeline">History</a></li>
+        <li><a href="starmap.html" data-page="starmap">Starmap</a></li>
+        <li><a href="gallery.html" data-page="gallery">Intel</a></li>
+        <li><a href="manifesto.html" data-page="manifesto">Manifesto</a></li>
+        <li><a href="recruitment.html" data-page="recruitment">Enlist</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg">
+      <img src="assets/images/Banner/Random/SC_20_Wallpaper_1500x500.jpg" alt="OSR operations">
+    </div>
+    <div class="page-hero-content">
+      <p class="section-label">// Classification: Open</p>
+      <h1 class="page-hero-title">Organizational Identity</h1>
+      <div class="section-line"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT CONTENT -->
+  <section id="about" class="page-section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image-wrapper reveal">
+          <img src="assets/images/Carosel/Random/SC_05_Wallpaper_3840x2160.jpg" alt="OSR reconnaissance vessel in asteroid field">
+          <div class="about-image-hud">◆ Asset classified — OSR PMC Div.</div>
+        </div>
+
+        <div class="about-text reveal">
+          <h2>Who We Are</h2>
+          <p>
+            OSR is a selective independent contractor collective who specialize in threat assessment,
+            security consulting, and operational response across contested systems. We do not recruit
+            broadly. We do not advertise results.
+          </p>
+          <p>
+            We operate outside the structures of the UEE — not against them, but independent of them.
+            We hold no government contract. We serve no Senate subcommittee, no corporate interest,
+            no faction with a flag. We serve the forward survival of humanity in a universe that will
+            not pause to wait for our institutions to function correctly.
+          </p>
+
+          <div class="about-stats">
+            <div class="stat-item">
+              <div class="stat-value" data-count="3">0</div>
+              <div class="stat-label">Active Cells</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" data-count="5">0</div>
+              <div class="stat-label">Access Tiers</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">PMC</div>
+              <div class="stat-label">Cover Identity</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADDITIONAL ABOUT INFO -->
+      <div class="about-extended reveal">
+        <div class="about-extended-block">
+          <h3>Political Neutrality</h3>
+          <p>
+            OSR holds no allegiance to the UEE, its Senate, its military branches, or any alien
+            government or corporate entity. Operational cooperation with these bodies is permitted
+            where it serves the foundational mandate. Allegiance to them is not.
+          </p>
+        </div>
+        <div class="about-extended-block">
+          <h3>Foundational Mandate</h3>
+          <p>
+            OSR exists to serve the continuity of human civilization independent of any government,
+            corporate, or factional interest. This mandate supersedes all other directives, contracts,
+            and instructions with the sole exception of the Directorate's sanctioned orders.
+          </p>
+        </div>
+        <div class="about-extended-block">
+          <h3>Primary Focus</h3>
+          <p>
+            Security operations and bounty hunting form the visible face of our public PMC identity.
+            Behind the cover, OSR conducts intelligence gathering, threat analysis, and — when
+            sanctioned by the Directorate — direct operational response.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-left">
+          <span class="footer-logo">OSR</span>
+          <span class="footer-copy">Operational Signal Reconnaissance — Est. ~2849 | All rights reserved.</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="about.html">Identity</a></li>
+          <li><a href="cells.html">Cells</a></li>
+          <li><a href="timeline.html">History</a></li>
+          <li><a href="starmap.html">Starmap</a></li>
+          <li><a href="manifesto.html">Manifesto</a></li>
+          <li><a href="https://robertsspaceindustries.com/en/orgs/OSR" target="_blank" rel="noopener">RSI</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <audio id="bg-audio" loop preload="auto">
+    <source src="assets/Audio/SC_SabreRavenTrailer.mp3" type="audio/mpeg">
+  </audio>
+  <button class="audio-toggle muted" id="audio-toggle" aria-label="Toggle ambient audio">
+    <div class="sound-bars"><span></span><span></span><span></span><span></span></div>
+  </button>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>

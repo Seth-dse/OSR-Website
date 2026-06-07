@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History — OSR | Operational Signal Reconnaissance</title>
+  <meta name="description" content="From the fall of Messer XI in 2792 through the Ardenne Incident to operational maturity — the classified history of OSR.">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body data-page="timeline">
+  <canvas id="star-canvas" aria-hidden="true"></canvas>
+  <div class="scanline-overlay" aria-hidden="true"></div>
+
+  <!-- NAVIGATION -->
+  <div id="nav-wrapper">
+    <nav>
+      <a href="index.html" class="nav-logo">
+        <div>
+          <span class="nav-logo-text">OSR</span>
+          <span class="nav-logo-sub">Operational Signal Recon</span>
+        </div>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" data-page="home">Home</a></li>
+        <li><a href="about.html" data-page="about">Identity</a></li>
+        <li><a href="cells.html" data-page="cells">Divisions</a></li>
+        <li><a href="timeline.html" data-page="timeline" class="active">History</a></li>
+        <li><a href="starmap.html" data-page="starmap">Starmap</a></li>
+        <li><a href="gallery.html" data-page="gallery">Intel</a></li>
+        <li><a href="manifesto.html" data-page="manifesto">Manifesto</a></li>
+        <li><a href="recruitment.html" data-page="recruitment">Enlist</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg">
+      <img src="assets/images/Banner/Home/SC_08_Wallpaper_1500x500.jpg" alt="Ship silhouette at sunset">
+    </div>
+    <div class="page-hero-content">
+      <p class="section-label">// Historical Record</p>
+      <h1 class="page-hero-title">Operational Timeline</h1>
+      <div class="section-line"></div>
+    </div>
+  </section>
+
+  <!-- TIMELINE CONTENT -->
+  <section id="timeline" class="page-section">
+    <div class="container">
+      <div class="timeline-container">
+        <div class="timeline-line" aria-hidden="true"></div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2792</div>
+            <h2 class="timeline-event-title">Fall of Messer XI</h2>
+            <p class="timeline-event-desc">
+              The 246-year Messer dynasty ends. The Senate moves quickly — the Advocacy is restructured,
+              the intelligence apparatus dismantled, the black budget programs shuttered. Veterans of the
+              old system are dispersed. The Senate calls it accountability. What they actually do is perform
+              surgery on a patient and leave the wound open.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2792 – 2840</div>
+            <h2 class="timeline-event-title">The Blind Decades</h2>
+            <p class="timeline-event-desc">
+              The post-Messer UEE operates without effective cross-agency intelligence synthesis.
+              The Vanduul push harder on the borders. The Xi'An watch carefully. Criminal syndicates
+              fill the spaces where Messer-era enforcement had been. The Division of Executive Services
+              accumulates data it cannot meaningfully process. The gap widens.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">~2847</div>
+            <h2 class="timeline-event-title">The Ardenne Incident</h2>
+            <p class="timeline-event-desc">
+              A civilian convoy is destroyed in a Vanduul-adjacent system. Predictive signals existed
+              and were not acted upon — not because analysts lacked data, but because the post-Messer
+              restructuring eliminated the cross-agency synthesis function. Senate report sealed within
+              thirty days. The Division director is promoted. The founding catalyst.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2849 – 2855</div>
+            <h2 class="timeline-event-title">The Coherence</h2>
+            <p class="timeline-event-desc">
+              The founding members identify each other and reach collective purpose. Cell structure,
+              name, cover identity, and foundational doctrine are established. OSR begins operating
+              in a limited capacity — intelligence gathering only, no direct action. No founding
+              document. No recorded membership.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2855 – 2900</div>
+            <h2 class="timeline-event-title">The Quiet Years</h2>
+            <p class="timeline-event-desc">
+              OSR expands slowly and deliberately. Cell MIRROR becomes fully operational. Cell VEIL
+              establishes the PMC cover identity. Cell EDGE is activated for the first time in the
+              late 2870s following a sanctioned direct action operation whose target and outcome
+              are not recorded.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2900 – Present</div>
+            <h2 class="timeline-event-title">Operational Maturity</h2>
+            <p class="timeline-event-desc">
+              OSR operates at full spectrum capability. The Vanduul threat, ongoing corporate overreach,
+              and continued Senate intelligence failures validate the founding doctrine on a recurring
+              basis. The org remains small, deliberately. The Directorate turns over by internal process.
+              No founding member is confirmed living or dead. The work continues.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARDENNE QUOTE -->
+      <div class="timeline-quote reveal">
+        <blockquote>
+          <p>
+            "They had the pieces. They chose not to build the puzzle because building the puzzle
+            would have required admitting they'd dismantled the people who knew how to build it.
+            So they buried the report and gave the families a flag."
+          </p>
+        </blockquote>
+        <div class="manifesto-attribution">— Internal briefing, Sanctioned tier, source unrecorded</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-left">
+          <span class="footer-logo">OSR</span>
+          <span class="footer-copy">Operational Signal Reconnaissance — Est. ~2849 | All rights reserved.</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="about.html">Identity</a></li>
+          <li><a href="cells.html">Cells</a></li>
+          <li><a href="timeline.html">History</a></li>
+          <li><a href="starmap.html">Starmap</a></li>
+          <li><a href="manifesto.html">Manifesto</a></li>
+          <li><a href="https://robertsspaceindustries.com/en/orgs/OSR" target="_blank" rel="noopener">RSI</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <audio id="bg-audio" loop preload="auto">
+    <source src="assets/Audio/SC_SabreRavenTrailer.mp3" type="audio/mpeg">
+  </audio>
+  <button class="audio-toggle muted" id="audio-toggle" aria-label="Toggle ambient audio">
+    <div class="sound-bars"><span></span><span></span><span></span><span></span></div>
+  </button>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>

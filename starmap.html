@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starmap — OSR | Operational Signal Reconnaissance</title>
+  <meta name="description" content="Tactical 3D Starmap of contested sectors including Stanton, Pyro, Nyx, Magnus, and Terra. Live jump point corridors and system telemetry.">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body data-page="starmap">
+  <!-- Scanline filter overlay for retro CRT terminal look -->
+  <div class="scanline-overlay" aria-hidden="true"></div>
+
+  <!-- NAVIGATION -->
+  <div id="nav-wrapper" class="scrolled">
+    <nav>
+      <a href="index.html" class="nav-logo">
+        <div>
+          <span class="nav-logo-text">OSR</span>
+          <span class="nav-logo-sub">Operational Signal Recon</span>
+        </div>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" data-page="home">Home</a></li>
+        <li><a href="about.html" data-page="about">Identity</a></li>
+        <li><a href="cells.html" data-page="cells">Divisions</a></li>
+        <li><a href="timeline.html" data-page="timeline">History</a></li>
+        <li><a href="starmap.html" data-page="starmap" class="active">Starmap</a></li>
+        <li><a href="gallery.html" data-page="gallery">Intel</a></li>
+        <li><a href="manifesto.html" data-page="manifesto">Manifesto</a></li>
+        <li><a href="recruitment.html" data-page="recruitment">Enlist</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- 3D STARMAP VIEWPORT SECTION -->
+  <section class="starmap-section">
+    <!-- WebGL Canvas Container -->
+    <div id="starmap-canvas-container"></div>
+    
+    <!-- 2D Projected Text Overlays -->
+    <div id="starmap-labels-container" style="position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 5;"></div>
+
+    <!-- HUD Instructors -->
+    <div class="starmap-instructions">◆ DRAG MOUSE TO ROTATE | SCROLL TO ZOOM | CLICK STAR NODES TO EXPLORE ◆</div>
+
+    <!-- Floating HUD Overlay elements -->
+    <div class="starmap-hud">
+      
+      <!-- LEFT HUD PANEL: Search, Filters & Systems List -->
+      <div class="hud-panel hud-panel-left">
+        <div class="panel-header">
+          <div class="panel-title">System Locator</div>
+          <span class="panel-subtitle">SECTOR V-12</span>
+        </div>
+        <div class="panel-body">
+          <!-- Search Wrapper -->
+          <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="starmap-search" class="search-input" placeholder="Search system or planet..." autocomplete="off">
+          </div>
+
+          <!-- Faction Filters Overlay -->
+          <div class="filter-section">
+            <div class="filter-heading">// Filter by Faction</div>
+            <div class="faction-filters">
+              <button class="filter-btn active" data-faction="all">All Sectors</button>
+              <button class="filter-btn filter-btn--uee" data-faction="uee">UEE</button>
+              <button class="filter-btn filter-btn--ind" data-faction="independent">Independent</button>
+              <button class="filter-btn filter-btn--outlaw" data-faction="unclaimed">Outlaw</button>
+            </div>
+          </div>
+
+          <!-- Systems Quick links List -->
+          <div class="system-list-section">
+            <div class="system-list-heading">// System Registry</div>
+            <ul class="system-list" id="starmap-system-list">
+              <!-- Dynamically populated by JS -->
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT HUD PANEL: Selected System Telemetry & Details -->
+      <div class="hud-panel hud-panel-right" id="hud-panel-right">
+        <div class="panel-header">
+          <div class="panel-title" id="telemetry-name">Stanton</div>
+          <span class="panel-subtitle" id="telemetry-class">F5V SPECTRAL</span>
+        </div>
+        <div class="panel-body">
+          <!-- System Statistics Table -->
+          <div class="detail-section">
+            <div class="detail-section-title">// Coordinates &amp; Allegiance</div>
+            <table class="telemetry-table">
+              <tr>
+                <td class="telemetry-label">Telemetry</td>
+                <td class="telemetry-value" id="telemetry-coords">X: 0.0 / Y: 0.0 / Z: 0.0</td>
+              </tr>
+              <tr>
+                <td class="telemetry-label">Authority</td>
+                <td class="telemetry-value uee" id="telemetry-faction">United Empire of Earth</td>
+              </tr>
+              <tr>
+                <td class="telemetry-label">Security</td>
+                <td class="telemetry-value" id="telemetry-security">Medium</td>
+              </tr>
+              <tr>
+                <td class="telemetry-label">Economy</td>
+                <td class="telemetry-value" id="telemetry-economy">Industrial / Tech</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Description -->
+          <div class="detail-section">
+            <div class="detail-section-title">// Recon Summary</div>
+            <p class="detail-description" id="telemetry-description">
+              Core commercial hub containing corporate-owned biospheres.
+            </p>
+          </div>
+
+          <!-- Connected Jumps -->
+          <div class="detail-section">
+            <div class="detail-section-title">// Detected Jump Corridors</div>
+            <ul class="detail-list" id="telemetry-jumps">
+              <!-- Dynamic -->
+            </ul>
+          </div>
+
+          <!-- Orbital Bodies -->
+          <div class="detail-section">
+            <div class="detail-section-title">// Orbital Scan Registry</div>
+            <ul class="detail-list" id="telemetry-bodies">
+              <!-- Dynamic -->
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM INTERACTIVE HUD BUTTONS -->
+    <div class="starmap-controls-bottom">
+      <button class="btn-hud" id="starmap-reset">Sector View [Reset]</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-left">
+          <span class="footer-logo">OSR</span>
+          <span class="footer-copy">Operational Signal Reconnaissance — Est. ~2849 | All rights reserved.</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="about.html">Identity</a></li>
+          <li><a href="cells.html">Cells</a></li>
+          <li><a href="timeline.html">History</a></li>
+          <li><a href="starmap.html">Starmap</a></li>
+          <li><a href="manifesto.html">Manifesto</a></li>
+          <li><a href="https://robertsspaceindustries.com/en/orgs/OSR" target="_blank" rel="noopener">RSI</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PERSISTENT BACKGROUND AUDIO SYSTEM -->
+  <audio id="bg-audio" loop preload="auto">
+    <source src="assets/Audio/SC_SabreRavenTrailer.mp3" type="audio/mpeg">
+  </audio>
+  <button class="audio-toggle muted" id="audio-toggle" aria-label="Toggle ambient audio">
+    <div class="sound-bars"><span></span><span></span><span></span><span></span></div>
+  </button>
+
+  <!-- SCRIPTS LOAD (Three.js WebGL and custom scripts) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="scripts/main.js"></script>
+  <script src="scripts/starmap.js"></script>
+</body>
+
+</html>

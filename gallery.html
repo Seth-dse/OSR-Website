@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intel — OSR | Operational Signal Reconnaissance</title>
+  <meta name="description" content="Field documentation and visual intelligence from OSR operations across contested systems.">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body data-page="gallery">
+  <canvas id="star-canvas" aria-hidden="true"></canvas>
+  <div class="scanline-overlay" aria-hidden="true"></div>
+
+  <!-- NAVIGATION -->
+  <div id="nav-wrapper">
+    <nav>
+      <a href="index.html" class="nav-logo">
+        <div>
+          <span class="nav-logo-text">OSR</span>
+          <span class="nav-logo-sub">Operational Signal Recon</span>
+        </div>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" data-page="home">Home</a></li>
+        <li><a href="about.html" data-page="about">Identity</a></li>
+        <li><a href="cells.html" data-page="cells">Divisions</a></li>
+        <li><a href="timeline.html" data-page="timeline">History</a></li>
+        <li><a href="starmap.html" data-page="starmap">Starmap</a></li>
+        <li><a href="gallery.html" data-page="gallery" class="active">Intel</a></li>
+        <li><a href="manifesto.html" data-page="manifesto">Manifesto</a></li>
+        <li><a href="recruitment.html" data-page="recruitment">Enlist</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg">
+      <img src="assets/images/Banner/Random/SC_36_Wallpaper_851x315.jpg" alt="Space operations">
+    </div>
+    <div class="page-hero-content">
+      <p class="section-label">// Visual Intelligence</p>
+      <h1 class="page-hero-title">Field Documentation</h1>
+      <div class="section-line"></div>
+    </div>
+  </section>
+
+  <!-- GALLERY CONTENT -->
+  <section id="gallery" class="page-section">
+    <div class="container">
+      <!-- CAROUSEL -->
+      <div class="carousel-wrapper reveal">
+        <div class="carousel-track" id="carousel-track">
+          <div class="carousel-slide">
+            <img src="assets/images/Carosel/Random/SC_07_Wallpaper_3840x2160.jpg" alt="Deep space reconnaissance">
+            <div class="carousel-slide-overlay">
+              <span class="carousel-slide-caption">◆ Sector 7 — Signal intercept confirmed</span>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/images/Carosel/Random/SC_12_Wallpaper_3840x2160.jpg" alt="Tactical engagement">
+            <div class="carousel-slide-overlay">
+              <span class="carousel-slide-caption">◆ Asset deployment — EDGE operational</span>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/images/Carosel/Random/SC_13_Wallpaper_3840x2160.jpg" alt="Fleet operations">
+            <div class="carousel-slide-overlay">
+              <span class="carousel-slide-caption">◆ VEIL cover transit — contractor fleet</span>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/images/Carosel/Random/SC_05_Wallpaper_3840x2160.jpg" alt="Asteroid belt patrol">
+            <div class="carousel-slide-overlay">
+              <span class="carousel-slide-caption">◆ MIRROR asset — deep field surveillance</span>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/images/Carosel/Random/SC_25_Wallpaper_3840x2160.jpg" alt="Capital ship engagement">
+            <div class="carousel-slide-overlay">
+              <span class="carousel-slide-caption">◆ Directorate sanctioned — full response</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="carousel-prev" aria-label="Previous slide">‹</button>
+        <button class="carousel-btn" id="carousel-next" aria-label="Next slide">›</button>
+      </div>
+      <div class="carousel-indicators">
+        <button class="carousel-indicator active" aria-label="Slide 1"></button>
+        <button class="carousel-indicator" aria-label="Slide 2"></button>
+        <button class="carousel-indicator" aria-label="Slide 3"></button>
+        <button class="carousel-indicator" aria-label="Slide 4"></button>
+        <button class="carousel-indicator" aria-label="Slide 5"></button>
+      </div>
+
+      <!-- IMAGE GRID -->
+      <div class="gallery-grid stagger-children">
+        <div class="gallery-item reveal">
+          <img src="assets/images/Banner/Random/SC_20_Wallpaper_1500x500.jpg" alt="Operational asset">
+          <div class="gallery-item-overlay">
+            <span class="gallery-item-caption">Reconnaissance — Vanduul frontier</span>
+          </div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="assets/images/Banner/Random/SC_28_Wallpaper_851x315.jpg" alt="Combat asset">
+          <div class="gallery-item-overlay">
+            <span class="gallery-item-caption">EDGE deployment — contested sector</span>
+          </div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="assets/images/Banner/Random/SC_33_Wallpaper_851x315.jpg" alt="Field operations">
+          <div class="gallery-item-overlay">
+            <span class="gallery-item-caption">VEIL logistics — supply corridor</span>
+          </div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="assets/images/Banner/Home/SC_08_Wallpaper_1500x500.jpg" alt="Sunset hangar">
+          <div class="gallery-item-overlay">
+            <span class="gallery-item-caption">Forward operating base — dusk</span>
+          </div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="assets/images/Banner/Random/SC_37_Wallpaper_1500x500.jpg" alt="Fleet staging">
+          <div class="gallery-item-overlay">
+            <span class="gallery-item-caption">Fleet staging — pre-operation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-left">
+          <span class="footer-logo">OSR</span>
+          <span class="footer-copy">Operational Signal Reconnaissance — Est. ~2849 | All rights reserved.</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="about.html">Identity</a></li>
+          <li><a href="cells.html">Cells</a></li>
+          <li><a href="timeline.html">History</a></li>
+          <li><a href="starmap.html">Starmap</a></li>
+          <li><a href="manifesto.html">Manifesto</a></li>
+          <li><a href="https://robertsspaceindustries.com/en/orgs/OSR" target="_blank" rel="noopener">RSI</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <audio id="bg-audio" loop preload="auto">
+    <source src="assets/Audio/SC_SabreRavenTrailer.mp3" type="audio/mpeg">
+  </audio>
+  <button class="audio-toggle muted" id="audio-toggle" aria-label="Toggle ambient audio">
+    <div class="sound-bars"><span></span><span></span><span></span><span></span></div>
+  </button>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>
