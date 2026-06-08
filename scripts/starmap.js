@@ -730,7 +730,91 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Launch Loop
   buildSystemList();
+  initIntelFeed();
   animate();
+
+  /* ==========================================
+     10. SIGNAL INTELLIGENCE FEED
+     ========================================== */
+  async function initIntelFeed() {
+    const feedEl = document.getElementById('intel-feed');
+    if (!feedEl) return;
+
+    try {
+      const response = await fetch('data/intel.json');
+      if (!response.ok) throw new Error('Failed to fetch intel data');
+      const intelData = await response.json();
+
+      // Clear initial message
+      feedEl.innerHTML = '';
+
+      // Sort by timestamp (newest first)
+      intelData.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+      intelData.forEach(item => {
+        const entry = document.createElement('div');
+        entry.className = 'intel-entry';
+        entry.style.cursor = 'pointer'; // Make it look clickable
+        
+        const date = new Date(item.timestamp);
+        const timeStr = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')} UTC`;
+
+        entry.innerHTML = `
+          <div class="intel-header">
+            <span class="intel-id">${item.id}</span>
+            <span class="intel-loc">${item.system.toUpperCase()} // ${item.location}</span>
+            <span class="intel-time">${timeStr}</span>
+          </div>
+          <div class="intel-body">
+            <span class="intel-severity severity-${item.severity.toLowerCase()}">[${item.severity}]</span>
+            <span class="intel-type">${item.type}:</span>
+            <span class="intel-content">${item.content}</span>
+          </div>
+        `;
+
+        // Click to focus system
+        entry.addEventListener('click', () => {
+          if (starSystems[item.system]) {
+            enterSystemView(item.system);
+          }
+        });
+
+        feedEl.appendChild(entry);
+      });
+
+      document.getElementById('intel-status').textContent = 'SIGNAL STABLE // ' + intelData.length + ' REPORTS';
+
+      // Setup Report Generator
+      const reportBtn = document.getElementById('intel-report-btn');
+      if (reportBtn) {
+        reportBtn.addEventListener('click', () => {
+          const reportText = prompt("Enter intelligence report content:");
+          if (!reportText) return;
+
+          const activeSys = starSystems[activeSystemId] || { id: "unknown", name: "UNKNOWN SECTOR" };
+          
+          const newReport = {
+            id: `INTEL-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`,
+            timestamp: new Date().toISOString(),
+            system: activeSys.id,
+            location: activeSys.name === "UNKNOWN SECTOR" ? "DEEP SPACE" : activeSys.name,
+            type: "FIELD RECON",
+            severity: "MEDIUM",
+            content: reportText
+          };
+
+          console.log("=== NEW INTEL REPORT GENERATED ===");
+          console.log(JSON.stringify(newReport, null, 2));
+          console.log("==================================");
+          alert("Intel Report generated! Check the browser console (F12) to copy the JSON entry and add it to data/intel.json.");
+        });
+      }
+    } catch (error) {
+      console.error('Error loading intel feed:', error);
+      feedEl.innerHTML = '<div class="intel-entry severity-critical">SIGNAL INTERFERENCE DETECTED // LINK FAILED</div>';
+      document.getElementById('intel-status').textContent = 'LINK OFFLINE';
+    }
+  }
 
   // Resize Handler
   window.addEventListener('resize', () => {

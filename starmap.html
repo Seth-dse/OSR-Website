@@ -150,6 +150,23 @@
         </div>
       </div>
 
+      <!-- BOTTOM HUD PANEL: Signal Intelligence Feed -->
+      <div class="hud-panel hud-panel-bottom">
+        <div class="panel-header">
+          <div class="panel-title">Signal Intelligence</div>
+          <div class="panel-controls">
+            <button id="intel-report-btn" class="filter-btn filter-btn--uee" style="font-size: 0.55rem; padding: 4px 8px;">+ GENERATE REPORT</button>
+          </div>
+          <span class="panel-subtitle" id="intel-status">ENCRYPTED LINK ACTIVE</span>
+        </div>
+        <div class="intel-feed-container">
+          <div id="intel-feed" class="intel-feed">
+            <!-- Dynamically populated by JS -->
+            <div class="intel-entry">INITIALIZING SECURE LINK...</div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- BOTTOM INTERACTIVE HUD BUTTONS -->

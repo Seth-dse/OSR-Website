@@ -1,0 +1,29 @@
+[
+  {
+    "id": "INTEL-2954-001",
+    "timestamp": "2024-06-07T10:15:00Z",
+    "system": "stanton",
+    "location": "Grim HEX",
+    "type": "SIGNAL RECON",
+    "severity": "MEDIUM",
+    "content": "Encrypted transmissions detected originating from the Yela belt. Pattern matches Ninetails pirate frequency. Monitoring for fleet movements."
+  },
+  {
+    "id": "INTEL-2954-002",
+    "timestamp": "2024-06-07T12:45:00Z",
+    "system": "pyro",
+    "location": "Ruin Station",
+    "type": "COMBAT OPS",
+    "severity": "CRITICAL",
+    "content": "Large scale skirmish reported near Pyro V. Multiple XenoThreat signatures confirmed. OSR assets advised to maintain stealth distance."
+  },
+  {
+    "id": "INTEL-2954-003",
+    "timestamp": "2024-06-07T15:20:00Z",
+    "system": "terra",
+    "location": "Prime",
+    "type": "DIPLOMATIC",
+    "severity": "LOW",
+    "content": "UEE Senate briefing regarding Synthworld project funding. Increased security presence noted around diplomatic landing pads."
+  }
+]
