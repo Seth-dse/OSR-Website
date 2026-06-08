@@ -9,12 +9,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (!canvasContainer) return;
 
   /* ==========================================
-     1. STAR SYSTEM DATA (Fetched from API)
+     1. STAR SYSTEM DATA (Fetched from PHP API)
      ========================================== */
   let starSystems = {};
   
   try {
-    const response = await fetch('data/starmap.json');
+    const response = await fetch('api/starmap.php');
     if (!response.ok) throw new Error('Failed to fetch starmap data');
     starSystems = await response.json();
   } catch (error) {
@@ -728,13 +728,40 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // Setup Report Generator
+  // Setup Report Generator & Modal
   const reportBtn = document.getElementById('intel-report-btn');
-  if (reportBtn) {
-    reportBtn.addEventListener('click', async () => {
-      const reportText = prompt("FIELD RECON REPORT:\nEnter intelligence findings from your adventure:");
-      if (!reportText) return;
+  const telemetryReportBtn = document.getElementById('telemetry-report-btn');
+  const intelModal = document.getElementById('intel-modal');
+  const modalClose = document.getElementById('intel-modal-close');
+  const intelForm = document.getElementById('intel-form');
+  const reportSystemInput = document.getElementById('report-system');
 
+  const openReportModal = () => {
+    const activeSys = (activeSystemId && starSystems[activeSystemId]) ? starSystems[activeSystemId] : { id: "unknown", name: "DEEP SPACE" };
+    reportSystemInput.value = activeSys.name;
+    intelModal.classList.add('active');
+  };
+
+  if (reportBtn && intelModal) {
+    reportBtn.addEventListener('click', openReportModal);
+  }
+  
+  if (telemetryReportBtn && intelModal) {
+    telemetryReportBtn.addEventListener('click', openReportModal);
+  }
+
+  if (intelModal) {
+    modalClose.addEventListener('click', () => {
+      intelModal.classList.remove('active');
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === intelModal) intelModal.classList.remove('active');
+    });
+
+    intelForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
       const activeSys = (activeSystemId && starSystems[activeSystemId]) ? starSystems[activeSystemId] : { id: "unknown", name: "DEEP SPACE" };
       
       const newReport = {
@@ -742,9 +769,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         timestamp: new Date().toISOString(),
         system: activeSys.id,
         location: activeSys.name === "DEEP SPACE" ? "UNKNOWN COORDINATES" : activeSys.name,
-        type: "FIELD RECON",
-        severity: "MEDIUM",
-        content: reportText
+        type: document.getElementById('report-type').value,
+        severity: document.getElementById('report-severity').value,
+        content: document.getElementById('report-content').value
       };
 
       try {
@@ -756,12 +783,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (!response.ok) throw new Error('Failed to save intel');
         
-        alert("Intelligence Logged to OSR Secure Database!");
+        intelModal.classList.remove('active');
+        intelForm.reset();
+        
         // Refresh feed automatically
         initIntelFeed();
+        alert("Intelligence Data Transmitted Successfully.");
       } catch (error) {
         console.error('Error saving report:', error);
-        alert("TRANSMISSION FAILED: PHP Link interrupted. Check file permissions.");
+        alert("TRANSMISSION FAILED: Link to Secure Database Interrupted.");
       }
     });
   }

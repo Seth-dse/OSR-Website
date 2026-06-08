@@ -147,6 +147,11 @@
               <!-- Dynamic -->
             </ul>
           </div>
+
+          <!-- Log Report Button -->
+          <div class="detail-section" style="margin-top: 30px;">
+            <button id="telemetry-report-btn" class="btn btn--primary" style="width: 100%; letter-spacing: 2px;">+ LOG FIELD REPORT</button>
+          </div>
         </div>
       </div>
 
@@ -174,6 +179,48 @@
     <!-- BOTTOM INTERACTIVE HUD BUTTONS -->
     <div class="starmap-controls-bottom">
       <button class="btn-hud" id="starmap-reset">Sector View [Reset]</button>
+    </div>
+
+    <!-- TACTICAL INTELLIGENCE REPORT MODAL -->
+    <div id="intel-modal" class="intel-modal">
+      <div class="intel-modal-content">
+        <div class="panel-header">
+          <div class="panel-title">Operational Intel Log</div>
+          <button id="intel-modal-close" class="modal-close">&times;</button>
+        </div>
+        <div class="panel-body">
+          <form id="intel-form">
+            <div class="form-group">
+              <label for="report-system">Active Sector</label>
+              <input type="text" id="report-system" readonly class="search-input">
+            </div>
+            <div class="form-group">
+              <label for="report-type">Mission Type</label>
+              <select id="report-type" class="search-input">
+                <option value="FIELD RECON">FIELD RECON</option>
+                <option value="SIGNAL RECON">SIGNAL RECON</option>
+                <option value="COMBAT OPS">COMBAT OPS</option>
+                <option value="DIPLOMATIC">DIPLOMATIC</option>
+                <option value="SALVAGE">SALVAGE</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="report-severity">Severity Level</label>
+              <select id="report-severity" class="search-input">
+                <option value="LOW">LOW (Standard Telemetry)</option>
+                <option value="MEDIUM">MEDIUM (Caution Advised)</option>
+                <option value="HIGH">HIGH (Active Threat)</option>
+                <option value="CRITICAL">CRITICAL (Direct Engagement)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="report-content">Intelligence Findings</label>
+              <textarea id="report-content" class="search-input" rows="4" placeholder="Enter operational findings..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary" style="width: 100%; margin-top: 10px;">Transmit Data</button>
+          </form>
+        </div>
+      </div>
     </div>
   </section>
 
