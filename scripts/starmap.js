@@ -3,184 +3,24 @@
    3D Starmap WebGL Engine (Three.js)
    ============================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   // Ensure we are on the starmap page
   const canvasContainer = document.getElementById('starmap-canvas-container');
   if (!canvasContainer) return;
 
   /* ==========================================
-     1. STAR SYSTEM DATA
+     1. STAR SYSTEM DATA (Fetched from API)
      ========================================== */
-  const starSystems = {
-    stanton: {
-      id: 'stanton',
-      name: 'Stanton',
-      coordinates: { x: 0, y: 0, z: 0 },
-      spectralClass: 'F5V',
-      color: '#fff0d4',
-      faction: 'uee',
-      factionName: 'United Empire of Earth',
-      security: 'Medium',
-      economy: 'Industrial, Technology, Commerce',
-      jumps: ['pyro', 'magnus', 'terra'],
-      description: 'The primary commercial hub of the UEE. A system containing four massive corporate-owned planets (Hurston, Crusader, ArcCorp, microTech) which were sold off to corporate conglomerates by the UEE government to pay off national debts.',
-      planets: [
-        { name: 'Hurston', type: 'Super-Earth (Industrial)', size: 0.6, distance: 4, speed: 0.008, color: '#b5795b', description: 'Owned by Hurston Dynamics. Heavily polluted by mining and military weapons manufacturing.' },
-        { name: 'Crusader', type: 'Gas Giant (Shipyards)', size: 0.8, distance: 7, speed: 0.005, color: '#f3c19e', description: 'A low-density gas giant with a breathable upper atmosphere where Crusader Industries builds gargantuan starships on floating platform cities like Orison.' },
-        { name: 'ArcCorp', type: 'Ecumenopolis (City Planet)', size: 0.5, distance: 10, speed: 0.003, color: '#d08c58', description: 'An almost entirely urbanized planet covered by skyscrapers, factories, and bustling plazas. Home to ArcCorp HQ.' },
-        { name: 'microTech', type: 'Tundra (Technology HQ)', size: 0.55, distance: 13, speed: 0.002, color: '#bfefff', description: 'An icy planet undergoing a failed terraforming process. Headquarters of microTech Corporation, specializing in software, mobiGlas, and tech manufacturing.' }
-      ]
-    },
-    pyro: {
-      id: 'pyro',
-      name: 'Pyro',
-      coordinates: { x: 25, y: 8, z: -20 },
-      spectralClass: 'K8V',
-      color: '#ff9d47',
-      faction: 'unclaimed',
-      factionName: 'Unclaimed / Outlaw Factions',
-      security: 'Null',
-      economy: 'Black Market, Scrap, Fuel Refining',
-      jumps: ['stanton', 'nyx', 'castra', 'odin'],
-      description: 'A lawless, desolate system focused around a dying, highly volatile flare star. Pyro is home to outlaws, smugglers, independent miners, and the infamous Ruin Station. Radiation storms sweep the system periodically.',
-      planets: [
-        { name: 'Pyro I', type: 'Charred Rocky', size: 0.4, distance: 3.5, speed: 0.012, color: '#7a3e2c', description: 'A tidally locked, scorched rock slowly breaking apart under the gravitational strain of the star.' },
-        { name: 'Pyro II', type: 'Core Remnant (Mines)', size: 0.5, distance: 5.5, speed: 0.009, color: '#a0785a', description: 'A planet rich in heavy metals. Site of Monorail mining outposts and heavy criminal resource exploitation.' },
-        { name: 'Pyro III', type: 'Volcanic Tectonic', size: 0.5, distance: 7.5, speed: 0.006, color: '#b23b1b', description: 'Covered in active magma flows and thick ash plumes. Faction skirmishes occur constantly for its geothermal outposts.' },
-        { name: 'Pyro IV', type: 'Ice-Crusted Rocky', size: 0.45, distance: 10, speed: 0.004, color: '#e0cda9', description: 'A rocky core encased in layers of water-ice. Orbiting closely with Pyro V.' },
-        { name: 'Pyro V', type: 'Gas Giant (Yellow)', size: 0.9, distance: 12.5, speed: 0.003, color: '#c3aa58', description: 'A massive greenish-yellow gas giant that holds Pyro IV and Ruin Station in its gravitational web.' },
-        { name: 'Ruin Station', type: 'Asteroid Space Station', size: 0.25, distance: 15, speed: 0.002, color: '#888888', description: 'Built in a hollowed-out asteroid. Originally a gold-rush station, now a lawless nexus for Pyro\'s outlaw gangs.' }
-      ]
-    },
-    nyx: {
-      id: 'nyx',
-      name: 'Nyx',
-      coordinates: { x: 45, y: 15, z: -12 },
-      spectralClass: 'F2V',
-      color: '#cceeff',
-      faction: 'independent',
-      factionName: 'Independent Communities',
-      security: 'Null',
-      economy: 'Mining, Salvage',
-      jumps: ['pyro', 'odin'],
-      description: 'A dark, asteroid-heavy system containing a dense nebula. Mostly settled by political dissidents, free-thinkers, and mining collectives looking to escape UEE oversight and taxation.',
-      planets: [
-        { name: 'Nyx I', type: 'Coreless Rocky', size: 0.35, distance: 4, speed: 0.01, color: '#6e5e54', description: 'A dead, coreless planetoid stripped of valuable surface minerals long ago.' },
-        { name: 'Nyx II', type: 'Gas Giant (Acidic)', size: 0.8, distance: 8, speed: 0.006, color: '#8b8a76', description: 'A massive, toxic gas giant with a high-pressure sulfur atmosphere.' },
-        { name: 'Delamar', type: 'Asteroid Outpost', size: 0.3, distance: 11, speed: 0.004, color: '#777777', description: 'A gargantuan, hollowed planetoid asteroid hidden in the Gliese Belt. Contains Levski, a free democratic anarchist mining colony.' }
-      ]
-    },
-    magnus: {
-      id: 'magnus',
-      name: 'Magnus',
-      coordinates: { x: -20, y: -10, z: -8 },
-      spectralClass: 'G1V',
-      color: '#fff6cc',
-      faction: 'uee',
-      factionName: 'United Empire of Earth',
-      security: 'Medium',
-      economy: 'Agricultural, Heavy Industry',
-      jumps: ['stanton', 'terra'],
-      description: 'An old naval staging system. Once home to major UEE Navy shipyards, the system fell into severe economic depression when the military abandoned it, but is now recovering due to agricultural exports and cheap real estate.',
-      planets: [
-        { name: 'Magnus I', type: 'Iron Planet', size: 0.45, distance: 4.5, speed: 0.009, color: '#a35c3c', description: 'A searingly hot, metal-rich planetoid with intensive robotic mining stations.' },
-        { name: 'Borea', type: 'Terrestrial (Habitable)', size: 0.6, distance: 8, speed: 0.005, color: '#5b8058', description: 'The primary inhabited planet of Magnus. Features massive prairies, decaying military shipyards, and growing cities.' },
-        { name: 'Magnus III', type: 'Gas Giant (Cyan)', size: 0.75, distance: 12, speed: 0.003, color: '#5b98a3', description: 'A beautiful light-blue gas giant situated at the far edge of the system\'s habitable zone.' }
-      ]
-    },
-    terra: {
-      id: 'terra',
-      name: 'Terra',
-      coordinates: { x: -30, y: 18, z: 20 },
-      spectralClass: 'G2V',
-      color: '#ffffdd',
-      faction: 'uee',
-      factionName: 'United Empire of Earth',
-      security: 'High',
-      economy: 'Diplomatic, Art, High-Tech, Trade',
-      jumps: ['stanton', 'magnus', 'sol', 'castra'],
-      description: 'The jewel of the UEE. Terra is a lush, vibrant system that has become the cultural, diplomatic, and economic sister capital to Earth. It stands as a symbol of progressive human development and green terraforming.',
-      planets: [
-        { name: 'Terra I', type: 'Searing rocky', size: 0.4, distance: 4, speed: 0.01, color: '#b89476', description: 'A highly volcanic planetoid orbiting extremely close to the star.' },
-        { name: 'Terra II', type: 'Arid / Mining', size: 0.5, distance: 7, speed: 0.007, color: '#c49958', description: 'An atmospheric desert planet rich in minerals, featuring heavy UEE corporate mining infrastructure.' },
-        { name: 'Terra III (Prime)', type: 'Terrestrial (Paradise)', size: 0.65, distance: 10, speed: 0.004, color: '#3f7380', description: 'The heart of the system. A beautiful biosphere planet featuring lush oceans, forests, and Prime, the futuristic capital city.' },
-        { name: 'Terra IV', type: 'Frozen Tundra', size: 0.45, distance: 13, speed: 0.003, color: '#a6c6cc', description: 'A cold, icy world terraformed to the edge of habitability. Home to research and scientific outposts.' }
-      ]
-    },
-    sol: {
-      id: 'sol',
-      name: 'Sol',
-      coordinates: { x: -60, y: 5, z: 45 },
-      spectralClass: 'G2V',
-      color: '#ffea88',
-      faction: 'uee',
-      factionName: 'United Empire of Earth',
-      security: 'High',
-      economy: 'Imperial Capital, Tourism, History',
-      jumps: ['terra'],
-      description: 'The birth system of humanity and the political seat of power of the UEE. Sol contains Earth, Mars, and the administrative apparatus of the empire. Entry is heavily regulated and protected by elite naval fleets.',
-      planets: [
-        { name: 'Mercury', type: 'Scorched Rock', size: 0.35, distance: 3.5, speed: 0.012, color: '#888888', description: 'A tiny, dead, airless world scorched by Sol\'s intense heat.' },
-        { name: 'Venus', type: 'Superheated Gas World', size: 0.5, distance: 5, speed: 0.009, color: '#e0ae62', description: 'A hellish world with crushing pressure and sulfur rain.' },
-        { name: 'Earth', type: 'Human Origin Capital', size: 0.6, distance: 7, speed: 0.006, color: '#4a82b8', description: 'The cradle of human civilization and official seat of the UEE Senate.' },
-        { name: 'Mars', type: 'Terraformed Desert', size: 0.45, distance: 9, speed: 0.005, color: '#c26442', description: 'The first successfully terraformed planet, now a major industrial and agricultural hub.' },
-        { name: 'Jupiter', type: 'Gas Giant (Large)', size: 0.9, distance: 11.5, speed: 0.003, color: '#e3be96', description: 'The largest gas giant in the system, surrounded by active industrial stations in its moons.' }
-      ]
-    },
-    odin: {
-      id: 'odin',
-      name: 'Odin',
-      coordinates: { x: -40, y: -20, z: -30 },
-      spectralClass: 'White Dwarf',
-      color: '#aaccff',
-      faction: 'independent',
-      factionName: 'Independent / UEE Protectorate',
-      security: 'Low',
-      economy: 'Resource Extraction, Weapons Testing',
-      jumps: ['pyro', 'nyx', 'vega'],
-      description: 'A cold, ancient system centered around a fading white dwarf star. Odin is famous for its asteroid belts and heavy weapons testing sites. The UEE military maintains a defensive presence near its research outposts.',
-      planets: [
-        { name: 'Odin I', type: 'Gaseous Core', size: 0.6, distance: 5, speed: 0.007, color: '#88aacc', description: 'A gas giant whose outer layers were stripped by the star\'s supernova epoch.' },
-        { name: 'Odin II', type: 'Frozen Rocky', size: 0.5, distance: 8, speed: 0.005, color: '#a0b0c0', description: 'A freezing, barren world housing deep-space weapons research labs.' },
-        { name: 'The Coil', type: 'Shattered Asteroid Belt', size: 0.35, distance: 12, speed: 0.003, color: '#666666', description: 'A massive, electromagnetic asteroid nebula cluster formed from a shattered planet. Outlaw den.' }
-      ]
-    },
-    castra: {
-      id: 'castra',
-      name: 'Castra',
-      coordinates: { x: 15, y: -25, z: 15 },
-      spectralClass: 'A2V',
-      color: '#ffffff',
-      faction: 'uee',
-      factionName: 'United Empire of Earth',
-      security: 'Medium',
-      economy: 'Military Logistics, Trade Staging',
-      jumps: ['pyro', 'terra'],
-      description: 'Originally established as a heavily fortified military barrier system during the Cold War with the Xi\'An. Following the peace accords, the military bases on Sherman (Castra II) were converted to civilian commerce and logistics.',
-      planets: [
-        { name: 'Castra I', type: 'Molten Rock', size: 0.45, distance: 4.5, speed: 0.008, color: '#7a5a40', description: 'A desolate, searing world orbiting extremely close to the bright white star.' },
-        { name: 'Sherman', type: 'Mountainous Fortified', size: 0.6, distance: 9, speed: 0.004, color: '#828c86', description: 'A massive mountainous world. Originally a massive military staging fortress, now a civilian trade capital.' }
-      ]
-    },
-    vega: {
-      id: 'vega',
-      name: 'Vega',
-      coordinates: { x: -10, y: 35, z: -25 },
-      spectralClass: 'F0V',
-      color: '#ffeedd',
-      faction: 'uee',
-      factionName: 'United Empire of Earth (Frontier)',
-      security: 'Low',
-      economy: 'Reconstruction, Defense Manufacturing',
-      jumps: ['odin'],
-      description: 'A border system that has borne the brunt of multiple massive Vanduul military incursions, culminating in the Battle of Vega II. The system is currently undergoing a massive UEE military fortification and reconstruction effort.',
-      planets: [
-        { name: 'Vega I', type: 'Searing Carbon', size: 0.4, distance: 5, speed: 0.009, color: '#524b46', description: 'A charred carbon rock containing little of value.' },
-        { name: 'Aremis', type: 'Oceanic / Inhabited', size: 0.6, distance: 9, speed: 0.005, color: '#4da69c', description: 'The cultural center of Vega. A beautiful blue world devastated by Vanduul raids, now rebuilding under strict military curfew.' },
-        { name: 'Vega III', type: 'Gas Giant (Green)', size: 0.85, distance: 13, speed: 0.003, color: '#6f8a65', description: 'A massive, greenish gas giant with a high-helium atmospheric content.' }
-      ]
-    }
-  };
+  let starSystems = {};
+  
+  try {
+    const response = await fetch('data/starmap.json');
+    if (!response.ok) throw new Error('Failed to fetch starmap data');
+    starSystems = await response.json();
+  } catch (error) {
+    console.error('Error loading starmap API:', error);
+    return;
+  }
 
   /* ==========================================
      2. THREE.JS INITIALIZATION & SCENE SETUP
@@ -626,6 +466,23 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
       bodyListEl.appendChild(li);
     });
+
+    // Major Stations List
+    const stationListEl = document.getElementById('telemetry-stations');
+    stationListEl.innerHTML = '';
+    if (sys.stations && sys.stations.length > 0) {
+      sys.stations.forEach(s => {
+        const li = document.createElement('li');
+        li.className = 'detail-list-item';
+        li.innerHTML = `
+          <span class="detail-list-item-name">${s.name}</span>
+          <span class="detail-list-item-type">${s.type}</span>
+        `;
+        stationListEl.appendChild(li);
+      });
+    } else {
+      stationListEl.innerHTML = '<li class="detail-list-item"><span class="detail-list-item-type">NO STATIONS DETECTED</span></li>';
+    }
   }
 
   // Faction overlays filter
@@ -872,6 +729,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Launch Loop
+  buildSystemList();
   animate();
 
   // Resize Handler
