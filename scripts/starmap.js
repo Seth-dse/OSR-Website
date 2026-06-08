@@ -728,6 +728,44 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
+  // Setup Report Generator
+  const reportBtn = document.getElementById('intel-report-btn');
+  if (reportBtn) {
+    reportBtn.addEventListener('click', async () => {
+      const reportText = prompt("FIELD RECON REPORT:\nEnter intelligence findings from your adventure:");
+      if (!reportText) return;
+
+      const activeSys = (activeSystemId && starSystems[activeSystemId]) ? starSystems[activeSystemId] : { id: "unknown", name: "DEEP SPACE" };
+      
+      const newReport = {
+        id: `INTEL-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`,
+        timestamp: new Date().toISOString(),
+        system: activeSys.id,
+        location: activeSys.name === "DEEP SPACE" ? "UNKNOWN COORDINATES" : activeSys.name,
+        type: "FIELD RECON",
+        severity: "MEDIUM",
+        content: reportText
+      };
+
+      try {
+        const response = await fetch('api/intel.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newReport)
+        });
+
+        if (!response.ok) throw new Error('Failed to save intel');
+        
+        alert("Intelligence Logged to OSR Secure Database!");
+        // Refresh feed automatically
+        initIntelFeed();
+      } catch (error) {
+        console.error('Error saving report:', error);
+        alert("TRANSMISSION FAILED: PHP Link interrupted. Check file permissions.");
+      }
+    });
+  }
+
   // Launch Loop
   buildSystemList();
   initIntelFeed();
@@ -741,7 +779,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!feedEl) return;
 
     try {
-      const response = await fetch('data/intel.json');
+      // Fetch from PHP API
+      const response = await fetch('api/intel.php');
       if (!response.ok) throw new Error('Failed to fetch intel data');
       const intelData = await response.json();
 
@@ -783,32 +822,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
 
       document.getElementById('intel-status').textContent = 'SIGNAL STABLE // ' + intelData.length + ' REPORTS';
-
-      // Setup Report Generator
-      const reportBtn = document.getElementById('intel-report-btn');
-      if (reportBtn) {
-        reportBtn.addEventListener('click', () => {
-          const reportText = prompt("Enter intelligence report content:");
-          if (!reportText) return;
-
-          const activeSys = starSystems[activeSystemId] || { id: "unknown", name: "UNKNOWN SECTOR" };
-          
-          const newReport = {
-            id: `INTEL-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`,
-            timestamp: new Date().toISOString(),
-            system: activeSys.id,
-            location: activeSys.name === "UNKNOWN SECTOR" ? "DEEP SPACE" : activeSys.name,
-            type: "FIELD RECON",
-            severity: "MEDIUM",
-            content: reportText
-          };
-
-          console.log("=== NEW INTEL REPORT GENERATED ===");
-          console.log(JSON.stringify(newReport, null, 2));
-          console.log("==================================");
-          alert("Intel Report generated! Check the browser console (F12) to copy the JSON entry and add it to data/intel.json.");
-        });
-      }
     } catch (error) {
       console.error('Error loading intel feed:', error);
       feedEl.innerHTML = '<div class="intel-entry severity-critical">SIGNAL INTERFERENCE DETECTED // LINK FAILED</div>';
